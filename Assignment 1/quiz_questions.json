@@ -1,0 +1,59 @@
+{
+    "questions": [
+        {
+            "question": "What is the capital of France?",
+            "options": {
+                "a": "London",
+                "b": "Berlin",
+                "c": "Paris",
+                "d": "Madrid"
+            },
+            "correct": "c",
+            "explanation": "Paris is the capital and largest city of France, known for landmarks like the Eiffel Tower and the Louvre Museum."
+        },
+        {
+            "question": "Which planet is known as the Red Planet?",
+            "options": {
+                "a": "Venus",
+                "b": "Mars",
+                "c": "Jupiter",
+                "d": "Saturn"
+            },
+            "correct": "b",
+            "explanation": "Mars is called the Red Planet because of iron oxide (rust) on its surface, which gives it a reddish appearance."
+        },
+        {
+            "question": "What is the largest ocean on Earth?",
+            "options": {
+                "a": "Atlantic Ocean",
+                "b": "Indian Ocean",
+                "c": "Arctic Ocean",
+                "d": "Pacific Ocean"
+            },
+            "correct": "d",
+            "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+        },
+        {
+            "question": "Who wrote 'Romeo and Juliet'?",
+            "options": {
+                "a": "Charles Dickens",
+                "b": "William Shakespeare",
+                "c": "Jane Austen",
+                "d": "Mark Twain"
+            },
+            "correct": "b",
+            "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596, making it one of his most famous tragic plays."
+        },
+        {
+            "question": "What is the chemical symbol for gold?",
+            "options": {
+                "a": "Go",
+                "b": "Gd",
+                "c": "Au",
+                "d": "Ag"
+            },
+            "correct": "c",
+            "explanation": "The symbol Au comes from the Latin word 'aurum,' meaning gold. Ag is silver, from 'argentum.'"
+        }
+    ]
+}
