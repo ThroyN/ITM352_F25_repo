@@ -9,7 +9,7 @@
                 "d": "Madrid"
             },
             "correct": "c",
-            "explanation": "Paris is the capital and largest city of France, known for landmarks like the Eiffel Tower and the Louvre Museum."
+            "explanation": "Paris is the capital and largest city of France."
         },
         {
             "question": "Which planet is known as the Red Planet?",
@@ -20,7 +20,7 @@
                 "d": "Saturn"
             },
             "correct": "b",
-            "explanation": "Mars is called the Red Planet because of iron oxide (rust) on its surface, which gives it a reddish appearance."
+            "explanation": "Mars is called the Red Planet because of rust on its surface giving it a reddish look"
         },
         {
             "question": "What is the largest ocean on Earth?",
@@ -42,7 +42,7 @@
                 "d": "Mark Twain"
             },
             "correct": "b",
-            "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596, making it one of his most famous tragic plays."
+            "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
         },
         {
             "question": "What is the chemical symbol for gold?",
@@ -53,7 +53,7 @@
                 "d": "Ag"
             },
             "correct": "c",
-            "explanation": "The symbol Au comes from the Latin word 'aurum,' meaning gold. Ag is silver, from 'argentum.'"
+            "explanation": "The symbol Au is gold, I know because of chemistry'"
         }
     ]
 }
