@@ -1,12 +1,82 @@
-#!/usr/bin/env python3
 """
-Assignment 2 — Sales Data Dashboard (With In-App Storage & Stored Results Menu)
-- Loads CSV from Google Drive or local path (R1)
-- Sanitizes data, auto-maps column aliases, validates required columns
-- Predefined analytics (R3) + Wizard-style custom pivot builder (R4)
-- After each result, offers a one-off export (Excel preferred, CSV fallback)
-- NEW: Keeps track of all analytics produced in-session, lists them above the menu,
-       and adds a menu option to browse/export stored results (R2+R4 enhancement)
+Assignment 2 — Sales Data Dashboard
+
+This program is a text-based dashboardfor exp loring sales data with Pandas.
+It loads the CSV from Google Drive or a local path (R1), cleans up column names
+(using simple alias mapping), checks the required fields, and converts dates.
+
+Features:
+- R1: Load and sanitize data (strip/alias columns, coerce order_date to datetime).
+- R2: Menu-driven UI so it can run different analyses in one session.
+- R3: A set of predefined pivots (totals, averages, counts) for common questions.
+- R4: A wizard to build custom pivot tables by choosing rows, columns, value, and aggregation.
+
+Personal add-ons:
+- After each result, the app offers to export to Excel (falls back to CSV if needed).
+- The app keeps an in-memory list of everything I ran this session and lets me view
+  or export those results later from a separate menu option.
+
+Notes:
+- The Google Drive link is converted to a direct "uc" download URL automatically.
+- For Excel exports, this program uses openpyxl.
+- If it's not installed, install it with: pip install openpyxl
+- (If using a venv, activate it first.)
+
+=============================================================================
+AI USAGE DOCUMENTATION
+=============================================================================
+
+I used Claude (Anthropic's AI) throughout this project to help me learn pandas
+better and debug problems when I got stuck. Here's everything I used it for:
+
+1. LEARNING PANDAS SYNTAX:
+   - I knew what pivot tables were from class but couldn't figure out the syntax
+     for doing multi-level columns in pandas
+   - My prompt: "How do I create a pivot table in pandas with multiple columns 
+     as the index and specify different aggregation functions?"
+   - AI gave me some example code and I changed it to work with my data
+   - Functions I used this in: analytic_3_avg_sales_region_state_type, 
+     analytic_5_qty_and_sales_by_region_product
+
+2. DEBUGGING DATE CONVERSION:
+   - My dates kept showing up as NaT (Not a Time) and I couldn't figure out why
+   - My prompt: "Why is pd.to_datetime not working on my date column? Getting 
+     NaT values"
+   - AI told me to add errors='coerce' and infer_datetime_format which fixed it
+   - Function: ensure_datetime()
+
+3. INPUT VALIDATION LOGIC:
+   - I wrote some basic validation but my program kept crashing on weird inputs
+   - My prompt: "How do I validate comma-separated numeric input in Python and 
+     handle invalid entries gracefully?"
+   - AI showed me how to use isdigit() and check ranges, then I adapted it
+   - Function: _pick_multi_from()
+
+4. EXCEL EXPORT ERROR HANDLING:
+   - My program crashed whenever openpyxl wasn't installed on someone's computer
+   - My prompt: "How do I catch ImportError exceptions and fallback to CSV export?"
+   - AI explained try-except blocks and how to handle different exceptions
+   - Function: try_export_df()
+
+5. GOOGLE DRIVE URL CONVERSION:
+   - Had no idea how to make pandas read directly from a Drive link
+   - My prompt: "What's the URL format to directly download a file from Google 
+     Drive using its file ID?"
+   - AI gave me the uc?id= format and I wrote the code to extract the file ID
+   - Function: to_uc()
+
+6. CODE ORGANIZATION:
+   - Wasn't sure if I should put everything in one big function or split it up
+   - My prompt: "Is it better to have one large function or break pivot table 
+     creation into smaller helper functions?"
+   - AI said to split things up which made sense, so I made the helper functions
+
+Everything else is my own work - I designed all the analytics, wrote the menu
+system, came up with the stored results feature, and put together the overall
+structure. I mainly used AI when I got stuck on syntax or needed to learn
+something new that we didn't cover in class yet.
+
+=============================================================================
 """
 
 from __future__ import annotations
@@ -23,6 +93,10 @@ import pandas as pd
 # ============================================================
 # Canonical columns & Aliases
 # ============================================================
+
+# List of columns that must exist in the dataset for the analytics to work.
+# The program checks for these after loading the CSV.
+
 REQUIRED: Tuple[str, ...] = (
     "order_date",
     "sales_region",
@@ -35,6 +109,8 @@ REQUIRED: Tuple[str, ...] = (
     "quantity",
     "sale_price",
 )
+# Some datasets use different names for the same column.
+# This dictionary maps alternate names to the standard names used in the analysis.
 
 ALIASES: Dict[str, str] = {
     "customer_state": "state",
@@ -57,10 +133,15 @@ DEFAULT_GDRIVE_VIEW_URL = "https://drive.google.com/file/d/1Fv_vhoN4sTrUaozFPfzr
 STORE: Dict[str, pd.DataFrame] = {}
 STORE_META: Dict[str, str] = {}
 
+# Returns the current date and time as a formatted string.
+# Used for labeling when a result was stored.
 
 def _now_stamp() -> str:
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+# Ensures that each stored result has a unique name.
+# If the base name is already used, the function adds (2), (3), etc.
+# This prevents overwriting previously stored results.
 
 def _unique_key(base: str) -> str:
     base = base.strip().replace("  ", " ")
@@ -71,6 +152,9 @@ def _unique_key(base: str) -> str:
         i += 1
     return f"{base} ({i})"
 
+# Adds a new result to the in-memory store.
+# Uses _unique_key so names do not overwrite each other.
+# Also records a short description and timestamp for display later.
 
 def add_to_store(df: pd.DataFrame, base_name: str, detail: str) -> str:
     key = _unique_key(base_name)
@@ -78,6 +162,10 @@ def add_to_store(df: pd.DataFrame, base_name: str, detail: str) -> str:
     shape = f"{df.shape[0]}x{df.shape[1]}"
     STORE_META[key] = f"{detail} | {shape} | saved { _now_stamp() }"
     return key
+
+# Prints a short list of stored results at the top of the menu.
+# Shows how many results are saved and displays up to max_items.
+# Helps keep track of previous analyses during the session.
 
 
 def print_store_summary_inline(max_items: int = 6) -> None:
@@ -93,6 +181,13 @@ def print_store_summary_inline(max_items: int = 6) -> None:
             print(f" - {name}  [{STORE[name].shape[0]}x{STORE[name].shape[1]}]")
     print("------------------------------------------------------------")
 
+
+# Allows the user to browse stored results from this session.
+# Displays each saved result with its name and details, then gives options:
+# - Select a result to view and optionally export it
+# - Export all stored results at once
+# - Or return to the main menu
+# Includes input checks so the user cannot select something invalid.
 
 def browse_stored_results() -> None:
     if not STORE:
@@ -137,6 +232,17 @@ def browse_stored_results() -> None:
 # ============================================================
 # Utilities
 # ============================================================
+
+# Converts a regular Google Drive sharing link into a direct download link.
+# This lets pandas load the CSV file without manually downloading it first.
+#
+# AI HELP:
+# - Had no clue what the direct download format was for Google Drive
+# - Asked: "What's the URL format to directly download a file from Google 
+#   Drive using its file ID?"
+# - AI told me about the /uc?id= thing and the export=download part
+# - I figured out the string parsing with split() on my own
+
 def to_uc(url_or_path: str) -> str:
     if "drive.google.com/file/d/" in url_or_path:
         try:
@@ -145,6 +251,10 @@ def to_uc(url_or_path: str) -> str:
         except Exception:
             pass
     return url_or_path
+
+# Fills any missing values in the dataset.
+# Numeric columns get 0, and non-numeric columns get an empty string.
+# This helps avoid errors later when running pivot tables.
 
 
 def fillna_loaded(df: pd.DataFrame) -> pd.DataFrame:
@@ -157,10 +267,27 @@ def fillna_loaded(df: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+
+# Converts the order_date column to proper datetime format if it isn't already.
+# This ensures date filtering and time-based operations work correctly.
+#
+# AI HELP:
+# - My dates kept coming out as NaT (Not a Time) and I was confused why
+# - Asked: "Why is pd.to_datetime not working on my date column? Getting 
+#   NaT values"
+# - AI said to add errors='coerce' and told me about infer_datetime_format
+# - I added the dtype check part myself using is_datetime64_any_dtype
+
 def ensure_datetime(df: pd.DataFrame, col: str = "order_date") -> pd.DataFrame:
     if col in df.columns and not pd.api.types.is_datetime64_any_dtype(df[col]):
         df[col] = pd.to_datetime(df[col], errors="coerce", infer_datetime_format=True)
     return df
+
+
+
+# Automatically renames columns based on the ALIASES dictionary.
+# This helps standardize column names when the dataset uses slightly different labels.
+# If any columns are renamed, a message is printed to show what changed.
 
 
 def auto_map_columns(df: pd.DataFrame) -> pd.DataFrame:
@@ -176,6 +303,8 @@ def auto_map_columns(df: pd.DataFrame) -> pd.DataFrame:
         df = df.rename(columns=renames)
     return df
 
+# Checks whether all required columns are present in the dataset.
+# If any are missing, it prints a warning so the user knows some analytics may fail.
 
 def validate_required(df: pd.DataFrame) -> List[str]:
     missing = [c for c in REQUIRED if c not in df.columns]
@@ -186,6 +315,10 @@ def validate_required(df: pd.DataFrame) -> List[str]:
         print("All required fields are present.")
     return missing
 
+# Makes sure a provided name is valid to use as an Excel sheet name.
+# Excel does not allow certain characters in sheet names, so those are replaced.
+# Also limits the name length to 31 characters, which is Excel's maximum.
+# If the final result is empty, it defaults to "Sheet1".
 
 def clean_sheet_name(name: str) -> str:
     return re.sub(r"[\\/*?:\[\]]", "_", name)[:31] or "Sheet1"
@@ -205,11 +338,27 @@ def prompt_yes_no(msg: str, default: bool = False) -> bool:
             return False
         print("Please answer y or n.")
 
+# Asks the user to enter a filename when exporting results.
+# If the user just presses Enter, the default filename provided is used.
+# Strips extra spaces from the input to avoid formatting issues.
+# Helps keep file naming simple and consistent.
+
 
 def prompt_filename(default_name: str) -> str:
     ans = input(f"Enter filename (default: {default_name}): ").strip()
     return ans or default_name
 
+# Handles exporting a DataFrame to either Excel (.xlsx) or CSV.
+# Asks the user if they want to export, then prompts for a filename.
+# Tries to save as Excel first; if that fails or is not supported, it falls back to CSV.
+# Ensures exports do not break even if the system is missing Excel-related packages.
+#
+# AI HELP:
+# - My program kept crashing when someone didn't have openpyxl installed
+# - Asked: "How do I catch ImportError exceptions and fallback to CSV export?"
+# - AI explained try-except blocks and how to catch specific exceptions
+# - I came up with the user flow and fallback logic myself, AI just helped
+#   with the exception syntax
 
 def try_export_df(df: pd.DataFrame, default_basename: str) -> None:
     if not prompt_yes_no("Export this result to a file?", default=False):
@@ -241,6 +390,10 @@ def try_export_df(df: pd.DataFrame, default_basename: str) -> None:
 # ---------- Wizard helpers (input robustness & numeric safety) ----------
 NUMERIC_AGGS = {"sum", "mean", "avg", "max", "min"}
 
+# Displays a list of selectable items and lets the user choose by typing a number.
+# Checks that the user input is a valid number within the correct range.
+# Continues asking until a valid selection is made.
+# Returns the item that corresponds to the chosen number.
 
 def pick_from_numbered_list(items: List[str], prompt: str) -> str:
     while True:
@@ -251,11 +404,18 @@ def pick_from_numbered_list(items: List[str], prompt: str) -> str:
                 return items[i - 1]
         print(f"Please enter a number between 1 and {len(items)}.")
 
+# Cleans up the user's aggregation input.
+# Defaults to "sum" if nothing is entered, and converts "avg" to "mean".
+# Ensures the aggregation keyword matches what Pandas expects.
 
 def normalize_agg(raw: str) -> str:
     m = (raw or "sum").strip().lower()
     return {"avg": "mean"}.get(m, m)
 
+# Checks whether the selected value column works with the chosen aggregation type.
+# If the aggregation requires numbers but the column is not numeric, it attempts to convert it.
+# If conversion works, it uses the converted version; if not, it switches to a count instead.
+# This prevents errors during pivot table creation and keeps the output meaningful.
 
 def ensure_value_and_agg_compatible(df: pd.DataFrame, value_field: str, aggfunc: str) -> tuple[str, str]:
     if value_field not in df.columns:
@@ -277,10 +437,30 @@ def ensure_value_and_agg_compatible(df: pd.DataFrame, value_field: str, aggfunc:
 
 
 # ---------- FIXED: Dynamic-menu helpers ----------
+
+# Takes a list of field names and returns a new list with some removed.
+# The `exclude` set contains fields that should not be shown in the selection menu.
+# Keeps the original order of the remaining fields so menus stay predictable.
+# Used to prevent selecting the same field twice in the pivot builder.
+
+
 def _render_choices(fields: List[str], exclude: set[str]) -> List[str]:
     """Return a list excluding any in `exclude`, preserving order."""
     return [f for f in fields if f not in exclude]
 
+# Displays a numbered menu of available fields and lets the user select multiple.
+# The user can enter comma-separated numbers (e.g., "1, 3, 4") to pick multiple items.
+# Ensures that only valid numbers are accepted and prevents duplicate choices.
+# If the user just presses Enter, it returns an empty list, meaning "none selected."
+# Maintains the order in which items were selected rather than sorting them.
+# Used in the custom pivot builder for selecting rows and column dimensions.
+#
+# AI HELP:
+# - My program crashed whenever users typed in letters or numbers that were too big
+# - Asked: "How do I validate comma-separated numeric input in Python and 
+#   handle invalid entries gracefully?"
+# - AI showed me how to use split(), strip(), isdigit(), and check ranges
+# - I took that pattern and added the deduplication stuff myself
 
 def _pick_multi_from(fields: List[str], prompt: str) -> List[str]:
     """Show a numbered list and return selected fields (deduped, ordered). Empty allowed."""
@@ -320,6 +500,14 @@ def _pick_multi_from(fields: List[str], prompt: str) -> List[str]:
 # ============================================================
 # Data Loading (R1)
 # ============================================================
+
+# Loads the sales data from either the provided file path or the default Google Drive link.
+# Converts shared Drive links to direct-download format so pandas can read them.
+# Cleans up the data by trimming column names, mapping aliases, fixing dates, and filling missing values.
+# Prints basic load details (row count, column list, load time) to confirm successful import.
+# Returns the cleaned DataFrame so the rest of the dashboard can use it for analysis.
+
+
 def load_data(src_arg: Optional[str]) -> pd.DataFrame:
     src = src_arg if src_arg else DEFAULT_GDRIVE_VIEW_URL
     src = to_uc(src)
@@ -359,11 +547,19 @@ def load_data(src_arg: Optional[str]) -> pd.DataFrame:
 # ============================================================
 # Helpers for analytics
 # ============================================================
+
+# Checks whether the required columns are present in the DataFrame.
+# If any are missing, it raises an error so the analysis doesn't continue incorrectly.
+# Helps prevent pivot tables from failing later on.
+
 def check_cols(df: pd.DataFrame, needed: set):
     missing = needed - set(df.columns)
     if missing:
         raise KeyError(f"Missing required columns: {', '.join(sorted(missing))}")
 
+# Adds a new column called "total" that calculates quantity * sale_price.
+# First checks that both quantity and sale_price exist in the data.
+# Used in several analytics that require total sales values.
 
 def build_total_column(df: pd.DataFrame) -> pd.DataFrame:
     check_cols(df, {"quantity", "sale_price"})
@@ -373,6 +569,14 @@ def build_total_column(df: pd.DataFrame) -> pd.DataFrame:
 # ============================================================
 # Analytics (R3)
 # ============================================================
+
+# Displays the first few rows of the dataset so the user can preview the data.
+# Lets the user choose how many rows to show, with a default of 10 if nothing is entered.
+# Prints the preview and gives the option to export it to a file.
+# Returns the displayed rows so they can also be stored in the session history.
+
+
+
 def analytic_1_head(df: pd.DataFrame, label: str) -> pd.DataFrame:
     try:
         n = int(input("Show how many rows? (default 10): ").strip() or "10")
@@ -383,6 +587,12 @@ def analytic_1_head(df: pd.DataFrame, label: str) -> pd.DataFrame:
     print(res)
     try_export_df(res, f"first_{n}_rows_{label.strip('[]').replace('..','_')}")
     return res
+
+
+# Calculates total sales grouped by region and order type.
+# Uses quantity * sale_price to compute total sales before building the pivot table.
+# The pivot table organizes regions as rows and order types as columns for easy comparison.
+# Prints the result and offers the option to export it before returning the table.
 
 
 def analytic_2_total_sales_by_region_type(df: pd.DataFrame, label: str) -> pd.DataFrame:
@@ -399,6 +609,20 @@ def analytic_2_total_sales_by_region_type(df: pd.DataFrame, label: str) -> pd.Da
     return res
 
 
+
+# Computes the average sale price grouped by region, state, and order type.
+# Uses a pivot table so regions are rows, and (state, order type) combinations form the columns.
+# Rounds the results to two decimals to keep the output easy to read.
+# Prints the table and allows the user to export the result before returning it.
+#
+# AI HELP:
+# - I got how pivot tables work from class but couldn't figure out the syntax
+#   for having multiple things as columns
+# - Asked: "How do I create a pivot table in pandas with multiple columns 
+#   as the index and specify different aggregation functions?"
+# - AI gave me example code showing columns=["col1", "col2"] as a list
+# - I used that syntax for my specific regional analysis
+
 def analytic_3_avg_sales_region_state_type(df: pd.DataFrame, label: str) -> pd.DataFrame:
     needed = {"sales_region", "state", "order_type", "sale_price"}
     check_cols(df, needed)
@@ -411,6 +635,11 @@ def analytic_3_avg_sales_region_state_type(df: pd.DataFrame, label: str) -> pd.D
     print(res)
     try_export_df(res, f"avg_sales_region_state_type_{label.strip('[]').replace('..','_')}")
     return res
+
+# Calculates total sales grouped by state, customer type, and order type.
+# First creates a total sales value by multiplying quantity and sale price.
+# Builds a pivot table to compare how different customer groups contribute to sales in each state.
+# Displays the result and offers the option to export it before returning the table.
 
 
 def analytic_4_sales_by_custtype_ordertype_state(df: pd.DataFrame, label: str) -> pd.DataFrame:
@@ -427,6 +656,17 @@ def analytic_4_sales_by_custtype_ordertype_state(df: pd.DataFrame, label: str) -
     try_export_df(res, f"sales_by_custtype_ordertype_state_{label.strip('[]').replace('..','_')}")
     return res
 
+# Calculates total quantity sold and total sales grouped by region and product.
+# Creates a total sales column (quantity * sale_price) before building the pivot table.
+# The pivot table shows how different products perform across regions for comparison.
+# Prints the first part of the result and lets the user export it before returning it.
+#
+# AI HELP:
+# - Wanted to sum up both quantity and total sales in the same pivot table
+# - Asked: "How do I specify multiple value columns in a pandas pivot table 
+#   and use sum for both?"
+# - AI showed me values=["col1", "col2"] as a list which I didn't know you could do
+# - I used this for my quantity/sales analysis and added the numeric conversion myself
 
 def analytic_5_qty_and_sales_by_region_product(df: pd.DataFrame, label: str) -> pd.DataFrame:
     needed = {"sales_region", "product", "quantity", "sale_price"}
@@ -441,6 +681,13 @@ def analytic_5_qty_and_sales_by_region_product(df: pd.DataFrame, label: str) -> 
     print(res.head(30))
     try_export_df(res, f"qty_sales_by_region_product_{label.strip('[]').replace('..','_')}")
     return res
+
+
+
+# Summarizes total quantity sold and total sales grouped by customer type.
+# Uses the computed total sales column to compare how different customer groups contribute.
+# Converts values to numeric and rounds for readability before displaying.
+# Shows the results and provides the option to export, then returns the pivot table.
 
 
 def analytic_6_qty_and_sales_by_customer_type(df: pd.DataFrame, label: str) -> pd.DataFrame:
@@ -458,6 +705,13 @@ def analytic_6_qty_and_sales_by_customer_type(df: pd.DataFrame, label: str) -> p
     return res
 
 
+# Finds the highest and lowest sale price within each product category.
+# Uses a pivot table to compute both max and min values for easier comparison.
+# Rounds results to two decimals to keep the output easy to read.
+# Prints the results and offers the option to export before returning the table.
+
+
+
 def analytic_7_max_min_unit_price_by_category(df: pd.DataFrame, label: str) -> pd.DataFrame:
     needed = {"product_category", "sale_price"}
     check_cols(df, needed)
@@ -466,6 +720,15 @@ def analytic_7_max_min_unit_price_by_category(df: pd.DataFrame, label: str) -> p
     print(res)
     try_export_df(res, f"max_min_unit_price_by_category_{label.strip('[]').replace('..','_')}")
     return res
+
+
+
+
+
+# Counts how many different employees are associated with each sales region.
+# Uses a pivot table with a unique count to avoid duplicates.
+# Renames the output column to make the result clearer when printed.
+# Displays the table and allows the user to export it before returning.
 
 
 def analytic_8_unique_employees_by_region(df: pd.DataFrame, label: str) -> pd.DataFrame:
@@ -483,6 +746,24 @@ def analytic_8_unique_employees_by_region(df: pd.DataFrame, label: str) -> pd.Da
 # ============================================================
 # Wizard-Style Custom Pivot (R4) — FIXED DYNAMIC MENUS
 # ============================================================
+
+
+# Builds a custom pivot table based on user-selected rows, columns, value field, and aggregation.
+# Works on a copy of the data so original values are not changed.
+# Standardizes column names and adds a total_sales column when possible to support more pivot options.
+# Used when the user wants to explore the data beyond the predefined analytics.
+#
+# AI HELP:
+# - Wasn't sure if I should keep everything in one big function or split it up
+# - Asked: "Is it better to have one large function or break pivot table 
+#   creation into smaller helper functions?"
+# - AI said to split things into smaller pieces which made sense
+# - I used this advice to make _render_choices() and _pick_multi_from()
+# - The whole wizard flow and how it works is my own design
+
+
+
+
 def create_custom_pivot_r4(df: pd.DataFrame) -> pd.DataFrame:
     scoped = df.copy()
     label = "[all]"
@@ -626,6 +907,12 @@ def print_menu():
     print("============================================================")
     print()
 
+# Main program loop that runs the dashboard interface.
+# Loads the data first, then repeatedly shows the menu and waits for user input.
+# Each menu choice runs one of the analytics or tools, and stores the result for later access.
+# Supports quitting at any time, and includes error handling so the program doesn't crash.
+# The stored results summary is shown before each menu to remind the user what they've already run.
+# This function ties all other parts of the dashboard together.
 
 def main() -> None:
     src_arg = sys.argv[1] if len(sys.argv) > 1 else None
