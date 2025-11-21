@@ -1,0 +1,75 @@
+<!--
+  index.html - Main page for my quiz app
+  
+  Three screens: intro (enter name), quiz (questions), results (score)
+  
+  AI Usage:
+  - Asked Claude "Create HTML structure for a multi-step quiz with intro, questions, 
+    and results screens that can be shown/hidden"
+  - Claude provided the basic three-div layout with hidden class approach
+  - I added specific element IDs (like username, options-container, score) so my 
+    JavaScript could target and update them
+  - Flask url_for syntax learned from class/Flask documentation, not AI
+  
+  How it works:
+  - quiz.js shows/hides screens by adding/removing "hidden" class
+  - Flask serves this when you visit the homepage
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <div id="app">
+    <h1>Multiple Choice Quiz</h1>
+    
+    <!-- INTRO SCREEN: Enter name and start -->
+    <div id="intro-screen">
+      <label>
+        Name:
+        <input type="text" id="username" placeholder="Enter your name">
+      </label>
+      <button id="start-btn">Start Quiz</button>
+      <p id="intro-error" class="error"></p>
+    </div>
+    
+    <!-- QUIZ SCREEN: Questions and answers -->
+    <!-- AI Usage: Asked Claude "How do I structure a quiz screen with dynamic question display"
+                  Basic layout from Claude, I added specific IDs for my JavaScript needs -->
+    <div id="quiz-screen" class="hidden">
+      <p id="progress"></p>
+      <h2 id="question-text"></h2>
+      
+      <!-- JavaScript creates answer buttons here dynamically -->
+      <div id="options-container"></div>
+      
+      <p id="feedback"></p>
+      <p id="explanation"></p>
+      <button id="next-btn">Next</button>
+      <p>Score: <span id="score">0</span></p>
+    </div>
+    
+    <!-- RESULTS SCREEN: Final score and review -->
+    <!-- AI Usage: Claude provided basic results screen structure
+                  I added time-taken display and areas-for-improvement review section -->
+    <div id="result-screen" class="hidden">
+      <h2>Quiz Completed!</h2>
+      <p id="final-score"></p>
+      <p id="time-taken"></p>
+      
+      <!-- Shows questions you got wrong for review -->
+      <div id="areas-for-improvement"></div>
+      
+      <button onclick="location.reload()">Restart</button>
+    </div>
+    
+  </div>
+  
+  <!-- JavaScript at end so HTML loads first -->
+  <script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+</body>
+</html>

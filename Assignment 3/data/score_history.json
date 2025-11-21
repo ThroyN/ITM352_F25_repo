@@ -1,0 +1,702 @@
+[
+  {
+    "timestamp": "2025-11-20 16:19:37",
+    "username": "Throy Nicdao",
+    "score": 0,
+    "total": 5,
+    "percentage": 0.0,
+    "time_taken": 13,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "d",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 2,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "a",
+        "correctLabel": "d",
+        "correct": false,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 3,
+        "question": "What is the chemical symbol for gold?",
+        "selectedLabel": "a",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      },
+      {
+        "questionId": 4,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "c",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 5,
+        "question": "What is the capital of France?",
+        "selectedLabel": "a",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "Paris is the capital and largest city of France."
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:19:57",
+    "username": "nicdaot",
+    "score": 2,
+    "total": 5,
+    "percentage": 40.0,
+    "time_taken": 10,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "b",
+        "correctLabel": "b",
+        "correct": true,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 2,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "a",
+        "correctLabel": "d",
+        "correct": false,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 3,
+        "question": "What is the chemical symbol for gold?",
+        "selectedLabel": "a",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      },
+      {
+        "questionId": 4,
+        "question": "What is the capital of France?",
+        "selectedLabel": "b",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "Paris is the capital and largest city of France."
+      },
+      {
+        "questionId": 5,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "b",
+        "correctLabel": "b",
+        "correct": true,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:20:50",
+    "username": "Throy Nicdao",
+    "score": 2,
+    "total": 5,
+    "percentage": 40.0,
+    "time_taken": 10,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "c",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 2,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "a",
+        "correctLabel": "d",
+        "correct": false,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 3,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "b",
+        "correctLabel": "b",
+        "correct": true,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 4,
+        "question": "What is the chemical symbol for gold?",
+        "selectedLabel": "c",
+        "correctLabel": "c",
+        "correct": true,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      },
+      {
+        "questionId": 5,
+        "question": "What is the capital of France?",
+        "selectedLabel": "b",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "Paris is the capital and largest city of France."
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:23:01",
+    "username": "Throy Nicdao",
+    "score": 0,
+    "total": 5,
+    "percentage": 0.0,
+    "time_taken": 126,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "c",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 2,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "a",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 3,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "c",
+        "correctLabel": "d",
+        "correct": false,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 4,
+        "question": "What is the capital of France?",
+        "selectedLabel": "d",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "Paris is the capital and largest city of France."
+      },
+      {
+        "questionId": 5,
+        "question": "What is the chemical symbol for gold?",
+        "selectedLabel": "a",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:24:38",
+    "username": "12123123",
+    "score": 3,
+    "total": 5,
+    "percentage": 60.0,
+    "time_taken": 8,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "b",
+        "correctLabel": "b",
+        "correct": true,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 2,
+        "question": "What is the capital of France?",
+        "selectedLabel": "a",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "Paris is the capital and largest city of France."
+      },
+      {
+        "questionId": 3,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "b",
+        "correctLabel": "b",
+        "correct": true,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 4,
+        "question": "What is the chemical symbol for gold?",
+        "selectedLabel": "d",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      },
+      {
+        "questionId": 5,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "d",
+        "correctLabel": "d",
+        "correct": true,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:24:54",
+    "username": "3213221",
+    "score": 1,
+    "total": 5,
+    "percentage": 20.0,
+    "time_taken": 8,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "b",
+        "correctLabel": "b",
+        "correct": true,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 2,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "d",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 3,
+        "question": "What is the chemical symbol for gold?",
+        "selectedLabel": "d",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      },
+      {
+        "questionId": 4,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "b",
+        "correctLabel": "d",
+        "correct": false,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 5,
+        "question": "What is the capital of France?",
+        "selectedLabel": "b",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "Paris is the capital and largest city of France."
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:25:07",
+    "username": "Throy Nicdao",
+    "score": 1,
+    "total": 5,
+    "percentage": 20.0,
+    "time_taken": 8,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "What is the capital of France?",
+        "selectedLabel": "b",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "Paris is the capital and largest city of France."
+      },
+      {
+        "questionId": 2,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "d",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 3,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "b",
+        "correctLabel": "b",
+        "correct": true,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 4,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "c",
+        "correctLabel": "d",
+        "correct": false,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 5,
+        "question": "What is the chemical symbol for gold?",
+        "selectedLabel": "b",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:27:23",
+    "username": "throy",
+    "score": 3,
+    "total": 5,
+    "percentage": 60.0,
+    "time_taken": 8,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "d",
+        "correctLabel": "d",
+        "correct": true,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 2,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "b",
+        "correctLabel": "b",
+        "correct": true,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 3,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "c",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 4,
+        "question": "What is the chemical symbol for gold?",
+        "selectedLabel": "c",
+        "correctLabel": "c",
+        "correct": true,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      },
+      {
+        "questionId": 5,
+        "question": "What is the capital of France?",
+        "selectedLabel": "a",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "Paris is the capital and largest city of France."
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:31:52",
+    "username": "n",
+    "score": 3,
+    "total": 5,
+    "percentage": 60.0,
+    "time_taken": 9,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "d",
+        "correctLabel": "d",
+        "correct": true,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 2,
+        "question": "What is the capital of France?",
+        "selectedLabel": "c",
+        "correctLabel": "c",
+        "correct": true,
+        "explanation": "Paris is the capital and largest city of France."
+      },
+      {
+        "questionId": 3,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "a",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 4,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "d",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 5,
+        "question": "What is the chemical symbol for gold Chris Brown?",
+        "selectedLabel": "c",
+        "correctLabel": "c",
+        "correct": true,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:42:30",
+    "username": "nicdaot",
+    "score": 1,
+    "total": 5,
+    "percentage": 20.0,
+    "time_taken": 22,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "d",
+        "correctLabel": "d",
+        "correct": true,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 2,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "d",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 3,
+        "question": "What is the capital of France?",
+        "selectedLabel": "a",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "Paris is the capital and largest city of France."
+      },
+      {
+        "questionId": 4,
+        "question": "What is the chemical symbol for gold Chris Brown?",
+        "selectedLabel": "d",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      },
+      {
+        "questionId": 5,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "d",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:48:32",
+    "username": "78",
+    "score": 2,
+    "total": 5,
+    "percentage": 40.0,
+    "time_taken": 10,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "d",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 2,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "b",
+        "correctLabel": "b",
+        "correct": true,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 3,
+        "question": "What is the capital of France?",
+        "selectedLabel": "c",
+        "correctLabel": "c",
+        "correct": true,
+        "explanation": "Paris is the capital and largest city of France."
+      },
+      {
+        "questionId": 4,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "b",
+        "correctLabel": "d",
+        "correct": false,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 5,
+        "question": "What is the chemical symbol for gold Chris Brown?",
+        "selectedLabel": "b",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:49:11",
+    "username": "nicdaot",
+    "score": 0,
+    "total": 5,
+    "percentage": 0.0,
+    "time_taken": 8,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "a",
+        "correctLabel": "d",
+        "correct": false,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 2,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "a",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 3,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "c",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 4,
+        "question": "What is the capital of France?",
+        "selectedLabel": "b",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "Paris is the capital and largest city of France."
+      },
+      {
+        "questionId": 5,
+        "question": "What is the chemical symbol for gold Chris Brown?",
+        "selectedLabel": "b",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 16:59:22",
+    "username": "Throy",
+    "score": 1,
+    "total": 5,
+    "percentage": 20.0,
+    "time_taken": 8,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "c",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 2,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "c",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      },
+      {
+        "questionId": 3,
+        "question": "What is the capital of France?",
+        "selectedLabel": "c",
+        "correctLabel": "c",
+        "correct": true,
+        "explanation": "Paris is the capital and largest city of France."
+      },
+      {
+        "questionId": 4,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "c",
+        "correctLabel": "d",
+        "correct": false,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 5,
+        "question": "What is the chemical symbol for gold Chris Brown?",
+        "selectedLabel": "d",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      }
+    ]
+  },
+  {
+    "timestamp": "2025-11-20 18:29:12",
+    "username": "dd",
+    "score": 0,
+    "total": 5,
+    "percentage": 0.0,
+    "time_taken": 7,
+    "breakdown": [
+      {
+        "questionId": 1,
+        "question": "What is the chemical symbol for gold Chris Brown?",
+        "selectedLabel": "b",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "The symbol Au is gold, I know because of chemistry"
+      },
+      {
+        "questionId": 2,
+        "question": "Which planet is known as the Red Planet?",
+        "selectedLabel": "a",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "Mars is called the Red Planet because of rust on its surface, which gives it a reddish appearance."
+      },
+      {
+        "questionId": 3,
+        "question": "What is the largest ocean on Earth?",
+        "selectedLabel": "a",
+        "correctLabel": "d",
+        "correct": false,
+        "explanation": "The Pacific Ocean is the largest and deepest ocean, covering approximately 63 million square miles."
+      },
+      {
+        "questionId": 4,
+        "question": "What is the capital of France?",
+        "selectedLabel": "d",
+        "correctLabel": "c",
+        "correct": false,
+        "explanation": "Paris is the capital and largest city of France."
+      },
+      {
+        "questionId": 5,
+        "question": "Who wrote 'Romeo and Juliet'?",
+        "selectedLabel": "a",
+        "correctLabel": "b",
+        "correct": false,
+        "explanation": "William Shakespeare wrote 'Romeo and Juliet' around 1594-1596."
+      }
+    ]
+  }
+]
